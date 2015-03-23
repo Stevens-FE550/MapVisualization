@@ -1,533 +1,525 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<!-- this file was created by Mohamed Ghanem for FE550 Spring term 2015-->
-<head>
-<title>FE550_HW Set 2 M. Ghanem</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<style type="text/css" media="Screen">
-/*\*/@import url("css/layout-1-master.css");/**/
-</style>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-<script src="maps/datamaps.usa.min.js"></script>
-
-</head>
-<body>
-<div id="maincontainer">
-  <div id="headline1">
-    <div class="title"><em>Sprint 2015</em>FE550</div>
-    <span class="subtitle">HW Set 2.Temporal Data Visualization by Mo Ghanem</span> </div>
-
-  <div id="contentwrapper">
-      <div class="text">
-        <h2>Introduction</h2></div>
-        <p>According to the <a href="http://projectonstudentdebt.org/files/pub/Student_Debt_and_the_Class_of_2013_NR.pdf">Institute for College Access and Success</a> Seven in 10 seniors who graduated from public and nonprofit colleges in 2013 had student loan debt, with an average of $28,400 per borrower. Student debt information can be found in the full report on the <a href="http://projectonstudentdebt.org/pub_home.php"><B>The Project on Student Debt</b></a> website. For some state level details, hover-over the map below and bar graphs on this page.</p>
-    
-<div id="map_Graduation" style="position: relative; width: 1200px; height: 800px;"></div>
-<!-- Map Legend -->
-<div class='my-legend' Align="left">
-<div class='legend-title'>Color Code Explanation of the Map</div>
-<div class='legend-scale'>
-  <ul class='legend-labels'>
-    <li><span style='background:#800000;'></span>High Debt States</li>
-    <li><span style='background:#CA5E5B;'></span>10th-25th</li>
-    <li><span style='background:#EAA9A8;'></span>26th-35th</li>
-    <li><span style='background:#306596;'></span>Low Debt States</li>
-    <li><span style='background:#EDDC4E;'></span>No Data</li>
-  </ul>
-</div>
-</div>
-
-<style type='text/css'>
-  .my-legend .legend-title {
-    text-align: left;
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 90%;
-    }
-  .my-legend .legend-scale ul {
-    margin: 0;
-    padding: 0;
-    float: center;
-    list-style: none;
-    }
-  .my-legend .legend-scale ul li {
-    display: block;
-    float: left;
-    width: 50px;
-    margin-bottom: 6px;
-    text-align: center;
-    font-size: 80%;
-    list-style: none;
-    }
-  .my-legend ul.legend-labels li span {
-    display: block;
-    float: left;
-    height: 15px;
-    width: 50px;
-    }
-  .my-legend .legend-source {
-    font-size: 70%;
-    color: #999;
-    clear: both;
-    }
-  .my-legend a {
-    color: #777;
-    }
-</style>
-  <script type="text/javascript">
-     var formatCurrency = d3.format("+$,.2f");
-     var formatprecentage = d3.format("0%")
-      var election = new Datamap({
-      scope: 'usa',
-      element: document.getElementById('map_Graduation'),
-      geographyConfig: {
-        highlightBorderColor: '#bada55',
-        popupTemplate: function(geography, data) {
-          return '<div class="hoverinfo">' + geography.properties.name + "<br />"  +'Graduation: ' + formatprecentage(data.Graduation) + "<br />"  
-          + 'Proportion with Debt: ' +  formatprecentage(data.debt) + "<br />"  +'Average Debt:' +  formatCurrency(data.Avedebt) + "<br />" +'Rank: ' +  data.Rank + '';
-        },
-        highlightBorderWidth: 3
-      },
- 
-
-      fills: {
-        'TopTen': '#800000',
-        'LowTen': '#306596',
-        'Mid': '#CA5E5B',
-        'Low': '#EAA9A8',
-        'First': '#191970',
-        defaultFill: '#EDDC4E'
-     }, 
-data:{
-        "AZ": {
-          "fillKey": "Mid",
-          "Graduation":0.37,
-          "debt":0.53,
-          "Avedebt":26450,
-          "Rank":12
-        },
-        "CO": {
-          "fillKey": "Low",
-          "Graduation":0.49,
-          "debt":"0.52",
-          "Avedebt":"24540",
-          "Rank":"36"
-        },
-        "DE": {
-          "fillKey": "TopTen",
-         "Graduation":0.51,
-          "debt":0.56,
-          "Avedebt":32571,
-          "Rank":2
-        },
-        "FL": {
-          "fillKey": "LowTen",
-          "Graduation":0.54,
-          "debt":"0.51",
-          "Avedebt":"22873",
-          "Rank":40
-        },
-        "GA": {
-          "fillKey": "Low",
-          "debt":"0.59",
-          "Graduation":0.43,
-          "Avedebt":"23115",
-          "Rank":"37"
-        },
-        "HI": {
-          "fillKey": "Low",
-          "Graduation":0.36,
-          "debt":"N/A",
-          "Avedebt":"N/A",
-          "Rank":"43"
-        },
-        "ID": {
-          "fillKey": "Mid",
-          "Graduation":0.44,
-          "debt":"0.65",
-          "Avedebt":"26751",
-          "Rank":"23"
-        },
-        "IL": {
-          "fillKey": "Mid",
-          "Graduation":0.5,
-          "debt":"0.64",
-          "Avedebt":"28034",
-          "Rank":"15"
-        },
-        "IN": {
-          "fillKey": "Mid",
-          "Graduation":0.48,
-          "debt":"0.64",
-          "Avedebt":"27886",
-          "Rank":"16"
-        },
-        "IA": {
-          "fillKey": "TopTen",
-          "Graduation":0.52,
-          "debt":"0.71",
-          "Avedebt":"29456",
-          "Rank":"9"
-        },
-        "KS": {
-          "fillKey": "Mid",
-          "Graduation":0.45,
-          "debt":"0.59",
-          "Avedebt":"23677",
-          "Rank":"27"
-        },
-        "KY": {
-          "fillKey": "Mid",
-          "Graduation":0.42,
-          "debt":"0.62",
-          "Avedebt":"23785",
-          "Rank":"34"
-        },
-        "LA": {
-          "fillKey": "LowTen",
-          "Graduation":0.42,
-          "debt":"0.48",
-          "Avedebt":"22789",
-          "Rank":"41"
-        },
-        "MD": {
-          "fillKey": "Mid",
-         "Graduation":0.48,
-          "debt":"0.58",
-          "Avedebt":"25951",
-          "Rank":"26"
-        },
-        "ME": {
-          "fillKey": "TopTen",
-          "Graduation":0.51,
-          "debt":"0.67",
-          "Avedebt":"29290",
-          "Rank":"7"
-        },
-        "MA": {
-          "fillKey": "Mid",
-          "Graduation":0.58,
-          "debt":"0.66",
-          "Avedebt":"28460",
-          "Rank":"14"
-        },
-        "MN": {
-          "fillKey": "TopTen",
-          "Graduation":0.49,
-          "debt":"0.7",
-          "Avedebt":"31497",
-          "Rank":"5"
-        },
-        "MI": {
-          "fillKey": "TopTen",
-          "Graduation":0.47,
-          "debt":"0.62",
-          "Avedebt":"28742",
-          "Rank":"8"
-        },
-        "MS": {
-          "fillKey": "Mid",
-          "Graduation":0.36,
-          "debt":"0.57",
-          "Avedebt":"27322",
-          "Rank":"19"
-        },
-        "MO": {
-          "fillKey": "Mid",
-          "Graduation":0.47,
-          "debt":"0.63",
-          "Avedebt":"23030",
-          "Rank":"33"
-        },
-        "MT": {
-          "fillKey": "Mid",
-          "Graduation":0.47,
-          "debt":"0.64",
-          "Avedebt":"27475",
-          "Rank":"20"
-        },
-        "NC": {
-          "fillKey": "LowTen",
-          "Graduation":0.47,
-          "debt":"0.59",
-          "Avedebt":"23891",
-          "Rank":"39"
-        },
-        "NE": {
-          "fillKey": "Mid",
-          "Graduation":0.5,
-          "debt":"0.63",
-          "Avedebt":"26473",
-         "Rank":"24"
-        },
-        "NV": {
-          "fillKey": "LowTen",
-          "Graduation":0.45,
-          "debt":"0.41",
-          "Avedebt":"20568",
-          "Rank":"48"
-        },
-        "NH": {
-          "fillKey": "TopTen",
-          "Graduation":0.58,
-          "debt":"0.74",
-          "Avedebt":"32698",
-          "Rank":"1"
-        },
-        "NJ": {
-          "fillKey": "Mid",
-         "Graduation":0.46,
-        "debt":"0.65",
-        "Avedebt":"29287",
-        "Rank":"18"
-        },
-        "NY": {
-          "fillKey": "Mid",
-          "Graduation":0.49,
-          "debt":"0.6",
-          "Avedebt":"25686",
-          "Rank":"25"
-        },
-        "ND": {
-          "fillKey": "",
-          "Graduation":0.49,
-          "debt":"N/A",
-          "Avedebt":"N/A",
-          "Rank":"*"
-        },
-        "NM": {
-          "fillKey": "LowTen",
-          "Graduation":0.34,
-          "debt":"0.61",
-          "Avedebt":"17994",
-          "Rank":"50"
-        },
-        "OH": {
-          "fillKey": "Mid",
-          "Graduation":0.51,
-          "debt":"0.69",
-          "Avedebt":"29037",
-          "Rank":"11"
-        },
-        "OK": {
-          "fillKey": "LowTen",
-          "Graduation":0.45,
-          "debt":"0.53",
-          "Avedebt":"23636",
-          "Rank":"46"
-        },
-        "OR": {
-          "fillKey": "Mid",
-         "Graduation":0.45,
-        "debt":"0.6",
-        "Avedebt":"26639",
-        "Rank":"30"
-        },
-        "PA": {
-          "fillKey": "TopTen",
-          "Graduation":0.58,
-          "debt":"0.71",
-          "Avedebt":"31677",
-          "Rank":"3"
-        },
-        "RI": {
-          "fillKey": "TopTen",
-          "Graduation":0.58,
-          "debt":"0.69",
-          "Avedebt":"30483",
-          "Rank":"4"
-        },
-        "SC": {
-          "fillKey": "TopTen",
-           "Graduation":0.41,
+  <!-- this file was created by Mohamed Ghanem for FE550 Spring term 2015-->
+  <head>
+    <title>FE550_HW Set 4 M.Ghanem</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <style type="text/css" media="Screen">
+    /*\*/@import url("css/layout-1-master.css");/**/
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="maps/datamaps.usa.min.js"></script>
+  </head>
+  <body>
+    <div id="maincontainer">
+      <div id="headline1">
+        <div class="title"><em>Sprint 2015</em>FE550</div>
+        <span class="subtitle">HW Set 4. Map Data Visualization by Mo Ghanem</span> </div>
+        <div id="contentwrapper">
+          <div class="text">
+          <h2>Introduction</h2></div>
+          <p>According to the <a href="http://projectonstudentdebt.org/files/pub/Student_Debt_and_the_Class_of_2013_NR.pdf">Institute for College Access and Success</a> Seven in 10 seniors who graduated from public and nonprofit colleges in 2013 had student loan debt, with an average of $28,400 per borrower. Student debt information can be found in the full report on the <a href="http://projectonstudentdebt.org/pub_home.php"><B>The Project on Student Debt</b></a> website. For some state level details, hover-over the map below and bar graphs on this page.</p>
+          
+          <div id="map_Graduation" style="position: relative; width: 1200px; height: 800px;"></div>
+          <!-- Map Legend -->
+          <div class='my-legend' Align="left">
+            <div class='legend-title'>Color Code Explanation of the Map</div>
+            <div class='legend-scale'>
+              <ul class='legend-labels'>
+                <li><span style='background:#800000;'></span>High Debt States</li>
+                <li><span style='background:#CA5E5B;'></span>10th-25th</li>
+                <li><span style='background:#EAA9A8;'></span>26th-35th</li>
+                <li><span style='background:#306596;'></span>Low Debt States</li>
+                <li><span style='background:#EDDC4E;'></span>No Data</li>
+              </ul>
+            </div>
+          </div>
+          <style type='text/css'>
+          .my-legend .legend-title {
+          text-align: left;
+          margin-bottom: 8px;
+          font-weight: bold;
+          font-size: 90%;
+          }
+          .my-legend .legend-scale ul {
+          margin: 0;
+          padding: 0;
+          float: center;
+          list-style: none;
+          }
+          .my-legend .legend-scale ul li {
+          display: block;
+          float: left;
+          width: 50px;
+          margin-bottom: 6px;
+          text-align: center;
+          font-size: 80%;
+          list-style: none;
+          }
+          .my-legend ul.legend-labels li span {
+          display: block;
+          float: left;
+          height: 15px;
+          width: 50px;
+          }
+          .my-legend .legend-source {
+          font-size: 70%;
+          color: #999;
+          clear: both;
+          }
+          .my-legend a {
+          color: #777;
+          }
+          </style>
+          <script type="text/javascript">
+          var formatCurrency = d3.format("+$,.2f");
+          var formatprecentage = d3.format("0%")
+          var election = new Datamap({
+          scope: 'usa',
+          element: document.getElementById('map_Graduation'),
+          geographyConfig: {
+          highlightBorderColor: '#bada55',
+          popupTemplate: function(geography, data) {
+          return '<div class="hoverinfo">' + geography.properties.name + "<br />"  +'Graduation: ' + formatprecentage(data.Graduation) + "<br />"
+            + 'Proportion with Debt: ' +  formatprecentage(data.debt) + "<br />"  +'Average Debt:' +  formatCurrency(data.Avedebt) + "<br />" +'Rank: ' +  data.Rank + '';
+            },
+            highlightBorderWidth: 3
+            },
+            
+            fills: {
+            'TopTen': '#800000',
+            'LowTen': '#306596',
+            'Mid': '#CA5E5B',
+            'Low': '#EAA9A8',
+            'First': '#191970',
+            defaultFill: '#EDDC4E'
+            },
+            data:{
+            "AZ": {
+            "fillKey": "Mid",
+            "Graduation":0.37,
+            "debt":0.53,
+            "Avedebt":26450,
+            "Rank":12
+            },
+            "CO": {
+            "fillKey": "Low",
+            "Graduation":0.49,
+            "debt":"0.52",
+            "Avedebt":"24540",
+            "Rank":"36"
+            },
+            "DE": {
+            "fillKey": "TopTen",
+            "Graduation":0.51,
+            "debt":0.56,
+            "Avedebt":32571,
+            "Rank":2
+            },
+            "FL": {
+            "fillKey": "LowTen",
+            "Graduation":0.54,
+            "debt":"0.51",
+            "Avedebt":"22873",
+            "Rank":40
+            },
+            "GA": {
+            "fillKey": "Low",
+            "debt":"0.59",
+            "Graduation":0.43,
+            "Avedebt":"23115",
+            "Rank":"37"
+            },
+            "HI": {
+            "fillKey": "Low",
+            "Graduation":0.36,
+            "debt":"N/A",
+            "Avedebt":"N/A",
+            "Rank":"43"
+            },
+            "ID": {
+            "fillKey": "Mid",
+            "Graduation":0.44,
+            "debt":"0.65",
+            "Avedebt":"26751",
+            "Rank":"23"
+            },
+            "IL": {
+            "fillKey": "Mid",
+            "Graduation":0.5,
+            "debt":"0.64",
+            "Avedebt":"28034",
+            "Rank":"15"
+            },
+            "IN": {
+            "fillKey": "Mid",
+            "Graduation":0.48,
+            "debt":"0.64",
+            "Avedebt":"27886",
+            "Rank":"16"
+            },
+            "IA": {
+            "fillKey": "TopTen",
+            "Graduation":0.52,
+            "debt":"0.71",
+            "Avedebt":"29456",
+            "Rank":"9"
+            },
+            "KS": {
+            "fillKey": "Mid",
+            "Graduation":0.45,
+            "debt":"0.59",
+            "Avedebt":"23677",
+            "Rank":"27"
+            },
+            "KY": {
+            "fillKey": "Mid",
+            "Graduation":0.42,
+            "debt":"0.62",
+            "Avedebt":"23785",
+            "Rank":"34"
+            },
+            "LA": {
+            "fillKey": "LowTen",
+            "Graduation":0.42,
+            "debt":"0.48",
+            "Avedebt":"22789",
+            "Rank":"41"
+            },
+            "MD": {
+            "fillKey": "Mid",
+            "Graduation":0.48,
+            "debt":"0.58",
+            "Avedebt":"25951",
+            "Rank":"26"
+            },
+            "ME": {
+            "fillKey": "TopTen",
+            "Graduation":0.51,
+            "debt":"0.67",
+            "Avedebt":"29290",
+            "Rank":"7"
+            },
+            "MA": {
+            "fillKey": "Mid",
+            "Graduation":0.58,
+            "debt":"0.66",
+            "Avedebt":"28460",
+            "Rank":"14"
+            },
+            "MN": {
+            "fillKey": "TopTen",
+            "Graduation":0.49,
+            "debt":"0.7",
+            "Avedebt":"31497",
+            "Rank":"5"
+            },
+            "MI": {
+            "fillKey": "TopTen",
+            "Graduation":0.47,
+            "debt":"0.62",
+            "Avedebt":"28742",
+            "Rank":"8"
+            },
+            "MS": {
+            "fillKey": "Mid",
+            "Graduation":0.36,
+            "debt":"0.57",
+            "Avedebt":"27322",
+            "Rank":"19"
+            },
+            "MO": {
+            "fillKey": "Mid",
+            "Graduation":0.47,
+            "debt":"0.63",
+            "Avedebt":"23030",
+            "Rank":"33"
+            },
+            "MT": {
+            "fillKey": "Mid",
+            "Graduation":0.47,
+            "debt":"0.64",
+            "Avedebt":"27475",
+            "Rank":"20"
+            },
+            "NC": {
+            "fillKey": "LowTen",
+            "Graduation":0.47,
+            "debt":"0.59",
+            "Avedebt":"23891",
+            "Rank":"39"
+            },
+            "NE": {
+            "fillKey": "Mid",
+            "Graduation":0.5,
+            "debt":"0.63",
+            "Avedebt":"26473",
+            "Rank":"24"
+            },
+            "NV": {
+            "fillKey": "LowTen",
+            "Graduation":0.45,
+            "debt":"0.41",
+            "Avedebt":"20568",
+            "Rank":"48"
+            },
+            "NH": {
+            "fillKey": "TopTen",
+            "Graduation":0.58,
+            "debt":"0.74",
+            "Avedebt":"32698",
+            "Rank":"1"
+            },
+            "NJ": {
+            "fillKey": "Mid",
+            "Graduation":0.46,
+            "debt":"0.65",
+            "Avedebt":"29287",
+            "Rank":"18"
+            },
+            "NY": {
+            "fillKey": "Mid",
+            "Graduation":0.49,
+            "debt":"0.6",
+            "Avedebt":"25686",
+            "Rank":"25"
+            },
+            "ND": {
+            "fillKey": "",
+            "Graduation":0.49,
+            "debt":"N/A",
+            "Avedebt":"N/A",
+            "Rank":"*"
+            },
+            "NM": {
+            "fillKey": "LowTen",
+            "Graduation":0.34,
+            "debt":"0.61",
+            "Avedebt":"17994",
+            "Rank":"50"
+            },
+            "OH": {
+            "fillKey": "Mid",
+            "Graduation":0.51,
+            "debt":"0.69",
+            "Avedebt":"29037",
+            "Rank":"11"
+            },
+            "OK": {
+            "fillKey": "LowTen",
+            "Graduation":0.45,
+            "debt":"0.53",
+            "Avedebt":"23636",
+            "Rank":"46"
+            },
+            "OR": {
+            "fillKey": "Mid",
+            "Graduation":0.45,
+            "debt":"0.6",
+            "Avedebt":"26639",
+            "Rank":"30"
+            },
+            "PA": {
+            "fillKey": "TopTen",
+            "Graduation":0.58,
+            "debt":"0.71",
+            "Avedebt":"31677",
+            "Rank":"3"
+            },
+            "RI": {
+            "fillKey": "TopTen",
+            "Graduation":0.58,
+            "debt":"0.69",
+            "Avedebt":"30483",
+            "Rank":"4"
+            },
+            "SC": {
+            "fillKey": "TopTen",
+            "Graduation":0.41,
             "debt":"0.55",
             "Avedebt":"27416",
-             "Rank":"10"
-        },
-        "SD": {
-          "fillKey": "Mid",
-          "Graduation":0.49,
-          "debt":"0.78",
-          "Avedebt":"25121",
-          "Rank":"29"
-        },
-        "TN": {
-          "fillKey": "Low",
-          "Graduation":0.47,
-          "debt":"0.58",
-          "Avedebt":"21775",
-          "Rank":"35"
-        },
-        "TX": {
-          "fillKey": "Low",
-          "Graduation":0.44,
-          "debt":"0.56",
-          "Avedebt":"23933",
-          "Rank":"32"
-        },
-        "UT": {
-          "fillKey": "LowTen",
-          "Graduation":0.47,
-          "debt":"0.5",
-          "Avedebt":"21520",
-          "Rank":"44"
-        },
-        "WI": {
-          "fillKey": "Mid",
-          "Graduation":0.52,
-          "debt":"0.68",
-          "Avedebt":"28041",
-          "Rank":"17"
-        },
-        "VA": {
-          "fillKey": "Mid",
-          "Graduation":0.51,
-          "debt":"0.6",
-          "Avedebt":"25017",
-          "Rank":"28"
-        },
-        "VT": {
-          "fillKey": "Mid",
-         "Graduation":0.62,
-          "debt":"0.63",
-          "Avedebt":"28299",
-          "Rank":"22"
-        },
-        "WA": {
-          "fillKey": "Low",
-          "Graduation":0.55,
-          "debt":"0.56",
-          "Avedebt":"23293",
-          "Rank":"38"
-        },
-        "WV": {
-          "fillKey": "Mid",
-          "Graduation":0.44,
-          "debt":"0.54",
-          "Avedebt":"26227",
-          "Rank":"21"
-        },
-        "WY": {
-          "fillKey": "LowTen",
-          "Graduation":0.5,
-          "debt":"0.47",
-          "Avedebt":"21241",
-          "Rank":"42"
-        },
-        "CA": {
-          "fillKey": "LowTen",
-          "Graduation":0.51,
-          "debt":"0.52",
-          "Avedebt":"20270",
-          "Rank":"49"
-        },
-        "CT": {
-          "fillKey": "TopTen",
-          "Graduation":0.55,
-          "debt":"0.61",
-          "Avedebt":"27816",
-          "Rank":"6"
-        },
-        "AK": {
-          "fillKey": "Mid",
-          "Graduation":40,
-          "debt":49,
-          "Avedebt":28782,
-          "Rank":13,
-        },
-        "AR": {
-          "fillKey": "Mid",
-          "Graduation":0.38,
-          "debt":"0.55",
-          "Avedebt":"23327",
-          "Rank":"31"
-        },
-        "AL": {
-          "fillKey": "Mid",
-          "Graduation":0.37,
-          "debt":"0.53",
-          "Avedebt":"26450",
-          "Rank":"12"
-        }
-      }
-    });
-      
-election.labels();
-
-</script>
-</p><h3>Top Ten Ranked State by Graduation Rate</h3>
-                          <div id="chartContainer">
-                            
-                            <script type="text/javascript">
-                             var formatCurrency = d3.format("+$,.2f");
-                            var formatprecentage = d3.format("0%")
-      
-                              d3.json("data/CollegeInSight.json", function(data) {
-                              data = dimple.filterData(data, "State", ["NH","DE","PA","RI","MN","CT","ME","MI","IA","SC"])  
-                                //,"NM","CA","NV","DC","OK","AZ","UT","HI","WY","LA"
-                                //console.table (data);
-                                //console.log (data)
-                                var svg = dimple.newSvg("#chartContainer", 800, 550);
-                                var myChart = new dimple.chart(svg, data);
-                                myChart.setBounds(100, 30, 600, 450);
-                                //console.log(myChart.axes.length);     
-                                  var x = myChart.addCategoryAxis ("x","State");
-                                  //myChart.addColorAxis("Graduation","blue");
-                                  var y= myChart.addMeasureAxis("y","Avedebt");
-                                  y.title = "Average Student Debt (the Class of 2013)"
-                                  y.tickFormat = '$';
-                                  var z = myChart.addMeasureAxis("z","Graduation");
-                                  zz = myChart.addMeasureAxis("zz","debt");
-                                  zz.tickFormat = '%'
-                                  var s1 = myChart.addSeries("debt", dimple.plot.bubble);
-                                  
-                                  s1.lineMarkers = true;
-                                  zz.aggregate = dimple.aggregateMethod.max;
-                                  zz.overrideMin = 100;
-                                  zz.overrideMax = 1000;
-                                  myChart.draw();
-                                   x.shapes.selectAll("text").attr("font-size","24px");
-                                   x.addLegend(10, 10, 500, 30, "left")
-                                
-
-                          });
-                                 
-                            </script>
-                          </div>
- </p><h3>Low-Debt State by Graduation Rate</h3>
-                          <div id="chartContainer2">
-                            
-                            <script type="text/javascript">
-                             var formatCurrency = d3.format("+$,.2f");
-                            var formatprecentage = d3.format("0%")
-      
-                              d3.json("data/CollegeInSight.json", function(data) {
-                              data = dimple.filterData(data, "State", ["NM","CA","NV","DC","OK","AZ","UT","WY","LA"])  
-                                //console.table (data);
-                                //console.log (data)
-                                var debt = formatprecentage (data.debt)
-                                var svg = dimple.newSvg("#chartContainer2", 800, 550);
-                                var myChart = new dimple.chart(svg, data);
-                                myChart.setBounds(100, 30, 600, 450);
-                                  var x = myChart.addCategoryAxis ("x","State");
-                                  var y= myChart.addMeasureAxis("y","Avedebt");
-                                  y.title = "Average Student Debt (the Class of 2013)"
-                                  y.tickFormat = '$';
-                                  var z = myChart.addMeasureAxis("z","Graduation");
-                                  zz = myChart.addMeasureAxis("zz","debt");
-                                  var s1 = myChart.addSeries("debt", dimple.plot.bubble);
-                                  s1.lineMarkers = true;
-                                  myChart.draw();
-                                   x.shapes.selectAll("text").attr("font-size","24px");
-                                
-
-                          });
-                                 
-                            </script>
-                          </div>
-
-</script>
-</body>
+            "Rank":"10"
+            },
+            "SD": {
+            "fillKey": "Mid",
+            "Graduation":0.49,
+            "debt":"0.78",
+            "Avedebt":"25121",
+            "Rank":"29"
+            },
+            "TN": {
+            "fillKey": "Low",
+            "Graduation":0.47,
+            "debt":"0.58",
+            "Avedebt":"21775",
+            "Rank":"35"
+            },
+            "TX": {
+            "fillKey": "Low",
+            "Graduation":0.44,
+            "debt":"0.56",
+            "Avedebt":"23933",
+            "Rank":"32"
+            },
+            "UT": {
+            "fillKey": "LowTen",
+            "Graduation":0.47,
+            "debt":"0.5",
+            "Avedebt":"21520",
+            "Rank":"44"
+            },
+            "WI": {
+            "fillKey": "Mid",
+            "Graduation":0.52,
+            "debt":"0.68",
+            "Avedebt":"28041",
+            "Rank":"17"
+            },
+            "VA": {
+            "fillKey": "Mid",
+            "Graduation":0.51,
+            "debt":"0.6",
+            "Avedebt":"25017",
+            "Rank":"28"
+            },
+            "VT": {
+            "fillKey": "Mid",
+            "Graduation":0.62,
+            "debt":"0.63",
+            "Avedebt":"28299",
+            "Rank":"22"
+            },
+            "WA": {
+            "fillKey": "Low",
+            "Graduation":0.55,
+            "debt":"0.56",
+            "Avedebt":"23293",
+            "Rank":"38"
+            },
+            "WV": {
+            "fillKey": "Mid",
+            "Graduation":0.44,
+            "debt":"0.54",
+            "Avedebt":"26227",
+            "Rank":"21"
+            },
+            "WY": {
+            "fillKey": "LowTen",
+            "Graduation":0.5,
+            "debt":"0.47",
+            "Avedebt":"21241",
+            "Rank":"42"
+            },
+            "CA": {
+            "fillKey": "LowTen",
+            "Graduation":0.51,
+            "debt":"0.52",
+            "Avedebt":"20270",
+            "Rank":"49"
+            },
+            "CT": {
+            "fillKey": "TopTen",
+            "Graduation":0.55,
+            "debt":"0.61",
+            "Avedebt":"27816",
+            "Rank":"6"
+            },
+            "AK": {
+            "fillKey": "Mid",
+            "Graduation":40,
+            "debt":49,
+            "Avedebt":28782,
+            "Rank":13,
+            },
+            "AR": {
+            "fillKey": "Mid",
+            "Graduation":0.38,
+            "debt":"0.55",
+            "Avedebt":"23327",
+            "Rank":"31"
+            },
+            "AL": {
+            "fillKey": "Mid",
+            "Graduation":0.37,
+            "debt":"0.53",
+            "Avedebt":"26450",
+            "Rank":"12"
+            }
+            }
+            });
+            
+            election.labels();
+            </script>
+          </p><h3>Top Ten Ranked State by Graduation Rate</h3>
+          <div id="chartContainer">
+            
+            <script type="text/javascript">
+            var formatCurrency = d3.format("+$,.2f");
+            var formatprecentage = d3.format("0%")
+            
+            d3.json("data/CollegeInSight.json", function(data) {
+            data = dimple.filterData(data, "State", ["NH","DE","PA","RI","MN","CT","ME","MI","IA","SC"])
+            //,"NM","CA","NV","DC","OK","AZ","UT","HI","WY","LA"
+            //console.table (data);
+            //console.log (data)
+            var svg = dimple.newSvg("#chartContainer", 800, 550);
+            var myChart = new dimple.chart(svg, data);
+            myChart.setBounds(100, 30, 600, 450);
+            //console.log(myChart.axes.length);
+            var x = myChart.addCategoryAxis ("x","State");
+            //myChart.addColorAxis("Graduation","blue");
+            var y= myChart.addMeasureAxis("y","Avedebt");
+            y.title = "Average Student Debt (the Class of 2013)"
+            y.tickFormat = '$';
+            var z = myChart.addMeasureAxis("z","Graduation");
+            zz = myChart.addMeasureAxis("zz","debt");
+            zz.tickFormat = '%'
+            var s1 = myChart.addSeries("debt", dimple.plot.bubble);
+            
+            s1.lineMarkers = true;
+            zz.aggregate = dimple.aggregateMethod.max;
+            zz.overrideMin = 100;
+            zz.overrideMax = 1000;
+            myChart.draw();
+            x.shapes.selectAll("text").attr("font-size","24px");
+            x.addLegend(10, 10, 500, 30, "left")
+            
+            });
+            
+            </script>
+          </div>
+        </p><h3>Low-Debt State by Graduation Rate</h3>
+        <div id="chartContainer2">
+          
+          <script type="text/javascript">
+          var formatCurrency = d3.format("+$,.2f");
+          var formatprecentage = d3.format("0%")
+          
+          d3.json("data/CollegeInSight.json", function(data) {
+          data = dimple.filterData(data, "State", ["NM","CA","NV","DC","OK","AZ","UT","WY","LA"])
+          //console.table (data);
+          //console.log (data)
+          var debt = formatprecentage (data.debt)
+          var svg = dimple.newSvg("#chartContainer2", 800, 550);
+          var myChart = new dimple.chart(svg, data);
+          myChart.setBounds(100, 30, 600, 450);
+          var x = myChart.addCategoryAxis ("x","State");
+          var y= myChart.addMeasureAxis("y","Avedebt");
+          y.title = "Average Student Debt (the Class of 2013)"
+          y.tickFormat = '$';
+          var z = myChart.addMeasureAxis("z","Graduation");
+          zz = myChart.addMeasureAxis("zz","debt");
+          var s1 = myChart.addSeries("debt", dimple.plot.bubble);
+          s1.lineMarkers = true;
+          myChart.draw();
+          x.shapes.selectAll("text").attr("font-size","24px");
+          
+          });
+          
+          </script>
+        </div>
+        </script>
+      </body>
